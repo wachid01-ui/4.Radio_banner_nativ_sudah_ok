@@ -14,7 +14,7 @@ import com.google.android.gms.ads.AdView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-
+import android.view.ViewGroup
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
@@ -571,13 +571,23 @@ fun NativeAdViewComposable() {
 
         factory = {
 
-            val adView = NativeAdView(context)
+            val adView = NativeAdView(context).apply {
+    layoutParams = ViewGroup.LayoutParams(
+        ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT
+    )
+}
 
-            val container = LinearLayout(context).apply {
-                orientation = LinearLayout.VERTICAL
-                setPadding(12, 12, 12, 12)
-                setBackgroundColor(
-                    android.graphics.Color.WHITE
+val container = LinearLayout(context).apply {
+    orientation = LinearLayout.VERTICAL
+    setPadding(12, 12, 12, 12)
+    setBackgroundColor(
+        android.graphics.Color.WHITE
+    )
+    layoutParams = LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams.MATCH_PARENT,
+        LinearLayout.LayoutParams.WRAP_CONTENT
+    )
                 )
             }
 
