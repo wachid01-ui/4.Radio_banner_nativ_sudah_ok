@@ -13,6 +13,8 @@ import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
+import android.widget.ImageView
 
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.ui.platform.LocalContext
