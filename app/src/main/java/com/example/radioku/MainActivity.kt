@@ -14,6 +14,17 @@ import com.google.android.gms.ads.AdView
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
+import android.widget.TextView
+
+import com.google.android.gms.ads.nativead.NativeAd
+import com.google.android.gms.ads.nativead.NativeAdView
+import com.google.android.gms.ads.nativead.MediaView
+import com.google.android.gms.ads.nativead.AdChoicesView
+import com.google.android.gms.ads.nativead.NativeAdOptions
+import com.google.android.gms.ads.AdLoader
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
 
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -451,13 +462,15 @@ fun RadioKuApp(
                         )
                     }
 
-                LazyColumn(
+               LazyColumn(
     modifier = Modifier
         .fillMaxWidth()
         .weight(1f)
 ) {
 
-    items(filteredRadioStations) { radio ->
+    items(
+        filteredRadioStations
+    ) { radio ->
 
         Column(
             modifier = Modifier
@@ -490,6 +503,11 @@ fun RadioKuApp(
 
             HorizontalDivider()
         }
+    }
+
+    // Native Ad setelah daftar radio
+    item {
+        NativeAdViewComposable()
     }
 }
             }
@@ -530,6 +548,56 @@ fun BannerAdView() {
                     AdRequest.Builder().build()
                 )
             }
+        }
+    )
+}
+@Composable
+fun NativeAdViewComposable() {
+
+    val context = LocalContext.current
+
+    AndroidView(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                vertical = 8.dp
+            ),
+        factory = {
+
+            val adView = NativeAdView(context)
+
+            val adLoader = AdLoader.Builder(
+                context,
+                "ca-app-pub-3940256099942544/2247696110"
+            )
+                .forNativeAd { nativeAd ->
+
+                    val headlineView =
+                        TextView(context)
+
+                    headlineView.text =
+                        nativeAd.headline
+
+                    headlineView.textSize = 16f
+
+                    adView.headlineView =
+                        headlineView
+
+                    adView.addView(
+                        headlineView
+                    )
+
+                    adView.setNativeAd(
+                        nativeAd
+                    )
+                }
+                .build()
+
+            adLoader.loadAd(
+                AdRequest.Builder().build()
+            )
+
+            adView
         }
     )
 }
