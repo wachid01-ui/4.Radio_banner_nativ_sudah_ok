@@ -561,6 +561,7 @@ fun NativeAdViewComposable() {
     AndroidView(
         modifier = Modifier
             .fillMaxWidth()
+            .height(120.dp)
             .padding(vertical = 8.dp),
         factory = {
 
@@ -569,6 +570,7 @@ fun NativeAdViewComposable() {
             val container = LinearLayout(context).apply {
                 orientation = LinearLayout.VERTICAL
                 setPadding(16, 16, 16, 16)
+                setBackgroundColor(android.graphics.Color.WHITE)
             }
 
             val headlineView = TextView(context).apply {
@@ -594,10 +596,13 @@ fun NativeAdViewComposable() {
                 .forNativeAd { nativeAd ->
 
                     headlineView.text =
-                        nativeAd.headline ?: ""
+                        nativeAd.headline ?: "Iklan"
 
                     adView.setNativeAd(nativeAd)
                 }
+                .withNativeAdOptions(
+                    NativeAdOptions.Builder().build()
+                )
                 .build()
 
             adLoader.loadAd(
