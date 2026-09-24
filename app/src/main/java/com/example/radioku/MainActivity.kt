@@ -469,46 +469,48 @@ fun RadioKuApp(
         .weight(1f)
 ) {
 
-    items(
-        filteredRadioStations
-    ) { radio ->
+    filteredRadioStations.forEachIndexed { index, radio ->
 
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable {
-                    onRadioSelected(radio)
-                }
-                .padding(
-                    vertical = 12.dp,
-                    horizontal = 8.dp
-                )
-        ) {
+        item {
 
-            Text(
-                text = radio.name,
-                fontSize = 16.sp,
-                fontWeight =
-                    if (radio == selectedRadio) {
-                        FontWeight.Bold
-                    } else {
-                        FontWeight.Normal
-                    },
-                color =
-                    if (radio == selectedRadio) {
-                        Color(0xFF2E7D32)
-                    } else {
-                        Color.Unspecified
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        onRadioSelected(radio)
                     }
-            )
+                    .padding(
+                        vertical = 12.dp,
+                        horizontal = 8.dp
+                    )
+            ) {
 
-            HorizontalDivider()
+                Text(
+                    text = radio.name,
+                    fontSize = 16.sp,
+                    fontWeight =
+                        if (radio == selectedRadio) {
+                            FontWeight.Bold
+                        } else {
+                            FontWeight.Normal
+                        },
+                    color =
+                        if (radio == selectedRadio) {
+                            Color(0xFF2E7D32)
+                        } else {
+                            Color.Unspecified
+                        }
+                )
+
+                HorizontalDivider()
+            }
         }
-    }
 
-    // Native Ad setelah daftar radio
-    item {
-        NativeAdViewComposable()
+        if ((index + 1) % 5 == 0) {
+            item {
+                NativeAdViewComposable()
+            }
+        }
     }
 }
             }
