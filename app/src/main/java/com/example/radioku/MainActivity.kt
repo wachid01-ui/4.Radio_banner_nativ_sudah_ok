@@ -566,7 +566,7 @@ fun NativeAdViewComposable() {
     AndroidView(
         modifier = Modifier
             .fillMaxWidth()
-            .height(250.dp)
+            .height(450.dp)
             .padding(vertical = 8.dp),
 
         factory = {
