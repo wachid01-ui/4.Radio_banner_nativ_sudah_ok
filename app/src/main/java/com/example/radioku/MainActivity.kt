@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 
+import android.widget.LinearLayout
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -551,6 +552,7 @@ fun BannerAdView() {
         }
     )
 }
+
 @Composable
 fun NativeAdViewComposable() {
 
@@ -559,12 +561,31 @@ fun NativeAdViewComposable() {
     AndroidView(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(
-                vertical = 8.dp
-            ),
+            .padding(vertical = 8.dp),
         factory = {
 
             val adView = NativeAdView(context)
+
+            val container = LinearLayout(context).apply {
+                orientation = LinearLayout.VERTICAL
+                setPadding(16, 16, 16, 16)
+            }
+
+            val headlineView = TextView(context).apply {
+                textSize = 18f
+                setTextColor(android.graphics.Color.BLACK)
+            }
+
+            container.addView(
+                headlineView,
+                LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+            )
+
+            adView.headlineView = headlineView
+            adView.addView(container)
 
             val adLoader = AdLoader.Builder(
                 context,
@@ -572,24 +593,10 @@ fun NativeAdViewComposable() {
             )
                 .forNativeAd { nativeAd ->
 
-                    val headlineView =
-                        TextView(context)
-
                     headlineView.text =
-                        nativeAd.headline
+                        nativeAd.headline ?: ""
 
-                    headlineView.textSize = 16f
-
-                    adView.headlineView =
-                        headlineView
-
-                    adView.addView(
-                        headlineView
-                    )
-
-                    adView.setNativeAd(
-                        nativeAd
-                    )
+                    adView.setNativeAd(nativeAd)
                 }
                 .build()
 
@@ -601,3 +608,4 @@ fun NativeAdViewComposable() {
         }
     )
 }
+
