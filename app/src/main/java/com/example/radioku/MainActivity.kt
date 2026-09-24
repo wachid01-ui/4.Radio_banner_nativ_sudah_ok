@@ -659,13 +659,16 @@ fun NativeAdViewComposable() {
             val mediaView =
                 MediaView(context)
 
-            container.addView(
-                mediaView,
-                LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    250
-                )
-            )
+            val mediaHeight =
+    (300 * context.resources.displayMetrics.density).toInt()
+
+container.addView(
+    mediaView,
+    LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams.MATCH_PARENT,
+        mediaHeight
+    )
+)
 
             adView.mediaView =
                 mediaView
