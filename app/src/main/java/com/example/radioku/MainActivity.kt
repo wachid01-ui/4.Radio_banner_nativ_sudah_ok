@@ -663,7 +663,7 @@ fun NativeAdViewComposable() {
                 mediaView,
                 LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
-                    100
+                    250
                 )
             )
 
