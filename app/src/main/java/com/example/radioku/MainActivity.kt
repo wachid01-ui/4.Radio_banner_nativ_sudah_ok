@@ -506,7 +506,7 @@ fun RadioKuApp(
             }
         }
 
-        if ((index + 1) % 5 == 0) {
+        if ((index + 1) % 10 == 0) {
             item {
                 NativeAdViewComposable()
             }
