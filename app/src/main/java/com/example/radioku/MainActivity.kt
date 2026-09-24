@@ -571,12 +571,7 @@ fun NativeAdViewComposable() {
 
         factory = {
 
-            val adView = NativeAdView(context).apply {
-    layoutParams = ViewGroup.LayoutParams(
-        ViewGroup.LayoutParams.MATCH_PARENT,
-        ViewGroup.LayoutParams.WRAP_CONTENT
-    )
-}
+            val adView = NativeAdView(context)
 
 val container = LinearLayout(context).apply {
     orientation = LinearLayout.VERTICAL
@@ -588,8 +583,7 @@ val container = LinearLayout(context).apply {
         LinearLayout.LayoutParams.MATCH_PARENT,
         LinearLayout.LayoutParams.WRAP_CONTENT
     )
-                )
-            }
+}
 
             // AD CHOICES
             val adChoicesView =
