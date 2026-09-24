@@ -560,160 +560,169 @@ fun BannerAdView() {
 
 @Composable
 fun NativeAdViewComposable() {
-
     val context = LocalContext.current
 
     AndroidView(
         modifier = Modifier
             .fillMaxWidth()
-            .height(450.dp)
-            .padding(vertical = 8.dp),
-
+            .height(100.dp)
+            .padding(horizontal = 8.dp, vertical = 4.dp),
         factory = {
-
             val adView = NativeAdView(context)
 
-val container = LinearLayout(context).apply {
-    orientation = LinearLayout.VERTICAL
-    setPadding(12, 12, 12, 12)
-    setBackgroundColor(
-        android.graphics.Color.WHITE
-    )
-    layoutParams = LinearLayout.LayoutParams(
-        LinearLayout.LayoutParams.MATCH_PARENT,
-        LinearLayout.LayoutParams.WRAP_CONTENT
-    )
-}
+            val container = LinearLayout(context).apply {
+                orientation = LinearLayout.VERTICAL
+                setPadding(10, 10, 10, 10)
+                setBackgroundColor(
+                    android.graphics.Color.WHITE
+                )
 
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+                )
+            }
+
+            // =========================
             // AD CHOICES
-            val adChoicesView =
-                AdChoicesView(context)
+            // =========================
+            val adChoicesView = AdChoicesView(context)
 
             container.addView(
                 adChoicesView,
                 LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    30
-                )
+                    24,
+                    20
+                ).apply {
+                    gravity = android.view.Gravity.END
+                }
             )
 
-            adView.adChoicesView =
-                adChoicesView
+            adView.adChoicesView = adChoicesView
 
-            // ICON
-            val iconView =
-                ImageView(context).apply {
-                    scaleType =
-                        ImageView.ScaleType.CENTER_CROP
-                }
+            // =========================
+            // BARIS UTAMA
+            // =========================
+            val row = LinearLayout(context).apply {
+                orientation = LinearLayout.HORIZONTAL
+                gravity = android.view.Gravity.CENTER_VERTICAL
+            }
 
             container.addView(
-                iconView,
+                row,
                 LinearLayout.LayoutParams(
-                    60,
+                    LinearLayout.LayoutParams.MATCH_PARENT,
                     60
                 )
             )
 
-            adView.iconView =
-                iconView
+            // =========================
+            // ICON / GAMBAR IKLAN
+            // =========================
+            val iconView = ImageView(context).apply {
+                scaleType = ImageView.ScaleType.CENTER_CROP
+            }
+
+            row.addView(
+                iconView,
+                LinearLayout.LayoutParams(
+                    55,
+                    55
+                ).apply {
+                    rightMargin = 10
+                }
+            )
+
+            adView.iconView = iconView
+
+            // =========================
+            // TEKS
+            // =========================
+            val textContainer = LinearLayout(context).apply {
+                orientation = LinearLayout.VERTICAL
+            }
+
+            row.addView(
+                textContainer,
+                LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
+            )
 
             // HEADLINE
-            val headlineView =
-                TextView(context).apply {
-                    textSize = 18f
-                    setTextColor(
-                        android.graphics.Color.BLACK
-                    )
-                    setPadding(0, 8, 0, 4)
-                }
-
-            container.addView(
-                headlineView,
-                LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
+            val headlineView = TextView(context).apply {
+                textSize = 15f
+                setTextColor(
+                    android.graphics.Color.BLACK
                 )
-            )
+                maxLines = 1
+                ellipsize = android.text.TextUtils.TruncateAt.END
+            }
 
-            adView.headlineView =
-                headlineView
+            textContainer.addView(headlineView)
+
+            adView.headlineView = headlineView
 
             // BODY
-            val bodyView =
-                TextView(context).apply {
-                    textSize = 14f
-                    setTextColor(
-                        android.graphics.Color.DKGRAY
-                    )
-                }
-
-            container.addView(
-                bodyView,
-                LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
+            val bodyView = TextView(context).apply {
+                textSize = 12f
+                setTextColor(
+                    android.graphics.Color.DKGRAY
                 )
-            )
+                maxLines = 2
+                ellipsize = android.text.TextUtils.TruncateAt.END
+            }
 
-            adView.bodyView =
-                bodyView
+            textContainer.addView(bodyView)
 
-            // MEDIA / GAMBAR IKLAN
-            val mediaView =
-                MediaView(context)
+            adView.bodyView = bodyView
 
-            val mediaHeight =
-    (300 * context.resources.displayMetrics.density).toInt()
-
-container.addView(
-    mediaView,
-    LinearLayout.LayoutParams(
-        LinearLayout.LayoutParams.MATCH_PARENT,
-        mediaHeight
-    )
-)
-
-            adView.mediaView =
-                mediaView
-
-            // CALL TO ACTION
-            val callToActionView =
-                TextView(context).apply {
-                    textSize = 14f
-                    setTextColor(
-                        android.graphics.Color.WHITE
+            // =========================
+            // TOMBOL CTA
+            // =========================
+            val callToActionView = TextView(context).apply {
+                textSize = 12f
+                setTextColor(
+                    android.graphics.Color.WHITE
+                )
+                setBackgroundColor(
+                    android.graphics.Color.rgb(
+                        46,
+                        125,
+                        50
                     )
-                    setBackgroundColor(
-                        android.graphics.Color.rgb(
-                            46,
-                            125,
-                            50
-                        )
-                    )
-                    setPadding(
-                        20,
-                        10,
-                        20,
-                        10
-                    )
-                }
+                )
+                setPadding(
+                    12,
+                    8,
+                    12,
+                    8
+                )
+                gravity = android.view.Gravity.CENTER
+            }
 
-            container.addView(
+            row.addView(
                 callToActionView,
                 LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
-                )
+                ).apply {
+                    leftMargin = 8
+                }
             )
 
-            adView.callToActionView =
-                callToActionView
+            adView.callToActionView = callToActionView
 
-            // Masukkan layout ke NativeAdView
+            // =========================
+            // MASUKKAN LAYOUT
+            // =========================
             adView.addView(container)
 
+            // =========================
             // LOAD NATIVE AD
+            // =========================
             val adLoader =
                 AdLoader.Builder(
                     context,
@@ -730,53 +739,42 @@ container.addView(
                         callToActionView.text =
                             nativeAd.callToAction ?: ""
 
+                        // ICON
                         if (nativeAd.icon != null) {
-
                             iconView.setImageDrawable(
                                 nativeAd.icon?.drawable
                             )
 
                             iconView.visibility =
                                 View.VISIBLE
-
                         } else {
-
                             iconView.visibility =
                                 View.GONE
                         }
 
+                        // BODY
                         if (nativeAd.body.isNullOrBlank()) {
-
                             bodyView.visibility =
                                 View.GONE
-
                         } else {
-
                             bodyView.visibility =
                                 View.VISIBLE
                         }
 
-                        if (
-                            nativeAd.callToAction
-                                .isNullOrBlank()
-                        ) {
-
+                        // CTA
+                        if (nativeAd.callToAction.isNullOrBlank()) {
                             callToActionView.visibility =
                                 View.GONE
-
                         } else {
-
                             callToActionView.visibility =
                                 View.VISIBLE
                         }
 
-                        adView.setNativeAd(
-                            nativeAd
-                        )
+                        // PASANG IKLAN
+                        adView.setNativeAd(nativeAd)
                     }
                     .withNativeAdOptions(
-                        NativeAdOptions.Builder()
-                            .build()
+                        NativeAdOptions.Builder().build()
                     )
                     .build()
 
