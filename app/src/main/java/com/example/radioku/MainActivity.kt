@@ -566,7 +566,7 @@ fun NativeAdViewComposable() {
     AndroidView(
         modifier = Modifier
             .fillMaxWidth()
-            .height(85.dp)
+            .height(110.dp)
             .padding(
                 horizontal = 8.dp,
                 vertical = 4.dp
@@ -670,8 +670,8 @@ background =
             topRow.addView(
                 adChoicesView,
                 LinearLayout.LayoutParams(
-                    24,
-                    20
+                    30,
+                    22
                 )
             )
 
@@ -695,7 +695,7 @@ background =
                 row,
                 LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
-                    55
+                    65
                 )
             )
 
