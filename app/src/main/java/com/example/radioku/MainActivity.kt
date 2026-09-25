@@ -643,9 +643,9 @@ background =
             // LABEL IKLAN
             val adLabel = TextView(context).apply {
 
-                text = "Iklan"
+                text = "Ads"
 
-                textSize = 11f
+                textSize = 13f
 
                 setTextColor(
                     android.graphics.Color.DKGRAY
