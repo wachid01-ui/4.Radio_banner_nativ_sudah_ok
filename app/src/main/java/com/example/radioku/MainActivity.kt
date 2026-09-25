@@ -607,7 +607,7 @@ background =
             )
         )
 
-        cornerRadius = 12f
+        cornerRadius = 0f
     }
 
 
@@ -651,6 +651,7 @@ background =
                     android.graphics.Color.DKGRAY
                 )
                 gravity = android.view.Gravity.CENTER_VERTICAL
+                includeFontPadding = false
             }
 
             topRow.addView(
