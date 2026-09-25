@@ -636,7 +636,7 @@ background =
                 topRow,
                 LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
-                    20
+                    22
                 )
             )
 
@@ -650,6 +650,7 @@ background =
                 setTextColor(
                     android.graphics.Color.DKGRAY
                 )
+                gravity = android.view.Gravity.CENTER_VERTICAL
             }
 
             topRow.addView(
