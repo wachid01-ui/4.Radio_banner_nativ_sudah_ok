@@ -586,9 +586,31 @@ fun NativeAdViewComposable() {
                     4
                 )
 
-                setBackgroundColor(
-                    android.graphics.Color.WHITE
-                )
+            
+background =
+    android.graphics.drawable.GradientDrawable().apply {
+
+        setColor(
+            android.graphics.Color.rgb(
+                245,
+                245,
+                245
+            )
+        )
+
+        setStroke(
+            1,
+            android.graphics.Color.rgb(
+                210,
+                210,
+                210
+            )
+        )
+
+        cornerRadius = 12f
+    }
+
+
 
                 layoutParams =
                     LinearLayout.LayoutParams(
