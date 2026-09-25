@@ -633,12 +633,12 @@ background =
             }
 
             container.addView(
-                topRow,
-                LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    22
-                )
+                 topRow,
+                 LinearLayout.LayoutParams(
+                 LinearLayout.LayoutParams.MATCH_PARENT,
+               32.dpToPx(context)
             )
+        )
 
             // LABEL IKLAN
             val adLabel = TextView(context).apply {
@@ -670,8 +670,8 @@ background =
             topRow.addView(
                 adChoicesView,
                 LinearLayout.LayoutParams(
-                    30,
-                    22
+                    32.dpToPx(context),
+                    28.dpToPx(context)
                 )
             )
 
@@ -695,7 +695,7 @@ background =
                 row,
                 LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
-                    65
+                    65.dpToPx(context)
                 )
             )
 
@@ -713,8 +713,8 @@ background =
             row.addView(
                 iconView,
                 LinearLayout.LayoutParams(
-                    45,
-                    45
+                    45.dpToPx(context),
+                    45.dpToPx(context)
                 ).apply {
 
                     rightMargin = 8
@@ -875,5 +875,7 @@ background =
         }
     )
 }
-
+fun Int.dpToPx(context: android.content.Context): Int {
+    return (this * context.resources.displayMetrics.density).toInt()
+}
 
